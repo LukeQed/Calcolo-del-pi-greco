@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Alla scoperta di π – Poligoni inscritti e circoscritti</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#18243b;background:#f3f7fb;font-size:16px}*{box-sizing:border-box}body{margin:0}.wrap{max-width:1180px;margin:auto;padding:24px}h1{font-size:clamp(1.7rem,3vw,2.35rem);margin:0 0 9px}h2{font-size:1.13rem;margin:0 0 15px}p{line-height:1.55}.subtitle{color:#53647b;margin:0 0 22px}.panel{background:white;border:1px solid #dce5ef;border-radius:18px;padding:20px;box-shadow:0 3px 16px #142c4e0a}.grid{display:grid;grid-template-columns:minmax(320px,1.15fr) minmax(320px,1fr);gap:18px}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px}.controls label{font-weight:650}.controls input[type=number]{width:90px;padding:9px;border:1px solid #adbdd2;border-radius:9px;font-size:1rem}.controls input[type=range]{flex:1;min-width:140px;accent-color:#2759b7}button{border:none;border-radius:10px;padding:10px 14px;font-size:.93rem;font-weight:650;background:#285bbb;color:white;cursor:pointer}button.secondary{background:#e9f0fb;color:#214a9a}button:hover{filter:brightness(.94)}button:focus-visible,input:focus-visible{outline:3px solid #e5a51b;outline-offset:3px}.drawing{width:100%;max-width:520px;display:block;margin:0 auto}.legend{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font-size:.9rem;margin-top:8px}.legend span{display:flex;align-items:center;gap:6px}.swatch{width:18px;height:4px;border-radius:3px;display:inline-block}.ins{background:#2775c9}.circ{background:#e36a3a}.cir{background:#26354d}.readouts{display:grid;gap:10px}.readout{border:1px solid #e2e9f1;border-radius:12px;padding:14px}.readout strong{display:block;font-size:1.3rem;font-variant-numeric:tabular-nums;margin-top:4px}.small{color:#607187;font-size:.88rem}.blue{color:#1765b4}.orange{color:#c45124}.equation{margin:14px 0;padding:13px 16px;background:#f2f6fc;border-radius:12px;text-align:center;font-size:1.1rem;font-variant-numeric:tabular-nums}.interval{font-size:1.07rem;text-align:center;margin:13px 0}.barwrap{margin:8px 0 18px}.bar{position:relative;height:25px;background:#eef2f8;border-radius:20px;overflow:hidden;border:1px solid #dae4f0}.segment{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,#398bd7,#e3a06e);opacity:.75}.marker{position:absolute;top:-5px;height:35px;width:3px;background:#1a263f}.barlabels{display:flex;justify-content:space-between;gap:12px;font-size:.78rem;font-variant-numeric:tabular-nums;color:#607187}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.note{color:#53647b;font-size:.92rem}.tableholder{overflow:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;text-align:right;font-size:.91rem}th,td{border-bottom:1px solid #e6ecf5;padding:10px 12px;white-space:nowrap}th{background:#f4f7fc;color:#34465d}th:first-child,td:first-child{text-align:left}tr.current{background:#eff6ff}tr:hover{background:#f8fbff}.foot{margin:18px 0 0}.checkrow{display:flex;gap:9px;align-items:center;font-size:.9rem;margin-top:10px}.checkrow input{accent-color:#285bbb}@media(max-width:780px){.grid{grid-template-columns:1fr}.wrap{padding:14px}.panel{padding:15px}}@media(prefers-reduced-motion:no-preference){polygon{transition:points .2s}} 
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><h1>Alla scoperta di π, con i poligoni</h1><p class="subtitle">Un esperimento geometrico: racchiudiamo una circonferenza fra due poligoni regolari e scopriamo come ottenere π.</p></header>
+<div class="grid">
+<section class="panel" aria-labelledby="tit-disegno"><h2 id="tit-disegno">1. Disegna e osserva</h2>
+<div class="controls"><label for="sides">Numero di lati</label><input id="sides" type="number" min="3" max="512" step="1" value="6" aria-label="Numero di lati"><input id="range" type="range" min="3" max="128" step="1" value="6" aria-label="Seleziona il numero di lati"></div>
+<svg class="drawing" id="geometry" viewBox="0 0 500 500" role="img" aria-label="Circonferenza nera, poligono inscritto blu e poligono circoscritto arancione, concentrici">
+<rect x="0" y="0" width="500" height="500" fill="#ffffff"/>
+<polygon id="outer" points="" fill="#f9ac7b1f" stroke="#e36a3a" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="250" cy="250" r="175" fill="none" stroke="#26354d" stroke-width="3"/>
+<polygon id="inner" points="" fill="#438ee51c" stroke="#2775c9" stroke-width="3" stroke-linejoin="round"/>
+<line x1="75" y1="250" x2="425" y2="250" stroke="#26354d" stroke-width="1.8" stroke-dasharray="7 5"/>
+<circle cx="250" cy="250" r="3.5" fill="#26354d"/>
+<text x="250" y="272" text-anchor="middle" fill="#26354d" font-size="16">diametro = 2r</text>
+</svg>
+<div class="legend"><span><i class="swatch ins"></i>Poligono inscritto</span><span><i class="swatch cir"></i>Circonferenza</span><span><i class="swatch circ"></i>Poligono circoscritto</span></div>
+<p class="note">Il poligono <b>blu</b> è dentro la circonferenza e ha i vertici sulla circonferenza. Il poligono <b>arancione</b> è all’esterno e ha i lati tangenti alla circonferenza. Entrambi hanno lo stesso numero di lati.</p>
+<div class="actions"><button id="double">Raddoppia i lati ×2</button><button id="reset" class="secondary">Ricomincia da 6</button></div>
+</section>
+<section class="panel" aria-labelledby="tit-valori"><h2 id="tit-valori">2. Calcola e confronta</h2><div class="small">Poniamo r = 1 e quindi diametro d = 2. I rapporti non cambiano se cambiamo le dimensioni del cerchio.</div>
+<div class="readouts" style="margin-top:13px">
+<div class="readout"><span>Perimetro del poligono <b class="blue">inscritto</b> (Pᵢ)</span><strong id="pIn">–</strong><span class="small">Approssimazione <b>per difetto</b>: Pᵢ / d = <b class="blue" id="low">–</b></span></div>
+<div class="readout"><span>Perimetro del poligono <b class="orange">circoscritto</b> (P꜀)</span><strong id="pOut">–</strong><span class="small">Approssimazione <b>per eccesso</b>: P꜀ / d = <b class="orange" id="high">–</b></span></div>
+</div>
+<div class="equation" id="bounds" aria-live="polite">– &lt; π &lt; –</div>
+<div class="small" style="text-align:center">π è sempre compreso fra i due rapporti!</div>
+<div class="barwrap"><div class="bar" title="Intervallo che contiene π"><div class="segment" id="segment"></div><div class="marker" id="piMarker" title="Valore di π"></div></div><div class="barlabels"><span id="axisMin"></span><span id="axisMax"></span></div></div>
+<div class="readout"><span>Quanto è largo l’intervallo tra i due valori?</span><strong id="gap">–</strong><span class="small" id="accuracy">–</span></div>
+<p class="note" id="compare">–</p>
+</section>
+</div>
+<section class="panel" style="margin-top:18px" aria-labelledby="tit-progressi"><h2 id="tit-progressi">3. Segui le approssimazioni successive</h2><p class="note">Ogni volta che raddoppi i lati, aggiungiamo un passaggio alla tabella. Puoi anche scegliere direttamente un numero di lati con il cursore.</p><div class="tableholder"><table><thead><tr><th>Lati (n)</th><th>Per difetto Pᵢ/d</th><th>π (riferimento)</th><th>Per eccesso P꜀/d</th><th>Ampiezza intervallo</th></tr></thead><tbody id="history"></tbody></table></div><div class="checkrow"><input type="checkbox" id="showPi" checked><label for="showPi">Mostra il valore di riferimento π nella tabella</label></div></section>
+<section class="panel foot" aria-labelledby="tit-formule"><h2 id="tit-formule">4. Perché funziona? Le formule</h2><p>Se il raggio della circonferenza è <b>r</b> e il numero dei lati è <b>n</b>, il lato del poligono inscritto misura <b>2r · sin(π/n)</b> e il lato del poligono circoscritto misura <b>2r · tan(π/n)</b>. Moltiplicando per n e dividendo per il diametro <b>2r</b> si ottiene:</p>
+<div class="equation">n · sin(π/n) &lt; π &lt; n · tan(π/n)</div>
+<p class="note">Le funzioni seno e tangente servono al programma per calcolare esattamente i rapporti. L’alunno può scoprire il principio anche senza conoscerle: il perimetro del poligono inscritto è minore della lunghezza della circonferenza e quello del circoscritto è maggiore. Aumentando il numero di lati, i due valori si avvicinano fra loro e a π. Il programma usa il valore matematico di π per disegnare e calcolare i poligoni; l’esperimento illustra il metodo di approssimazione, non un calcolo indipendente di π.</p>
+</section>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id), input=$('sides'),range=$('range'),tbody=$('history');
+const r=175, cx=250,cy=250; let seen=[];
+const fmt=(x,k=9)=>x.toFixed(k).replace('.',',');
+function coordinates(n,outer){let v=[];const radius=outer?r/Math.cos(Math.PI/n):r;const start=-Math.PI/2-(outer?Math.PI/n:0);for(let i=0;i<n;i++){let a=start+2*Math.PI*i/n;v.push((cx+radius*Math.cos(a)).toFixed(3)+','+(cy+radius*Math.sin(a)).toFixed(3))}return v.join(' ')}
+function numbers(n){let low=n*Math.sin(Math.PI/n),high=n*Math.tan(Math.PI/n);return {n,low,high,gap:high-low};}
+function renderHistory(n){const vals=[...new Set([...seen,n])].sort((a,b)=>a-b);tbody.replaceChildren();for(const x of vals){let v=numbers(x),tr=document.createElement('tr');if(x===n)tr.className='current';let entries=[String(x),fmt(v.low),$('showPi').checked?fmt(Math.PI):'•••••••••',fmt(v.high),fmt(v.gap)];for(let j=0;j<entries.length;j++){let td=document.createElement('td');td.textContent=entries[j];tr.appendChild(td)}tbody.appendChild(tr)}}
+function update(raw){const n=Math.max(3,Math.min(512,Math.round(Number(raw)||6)));input.value=n;range.value=Math.min(n,128);const a=numbers(n);$('inner').setAttribute('points',coordinates(n,false));$('outer').setAttribute('points',coordinates(n,true));$('pIn').textContent=fmt(2*a.low);$('pOut').textContent=fmt(2*a.high);$('low').textContent=fmt(a.low);$('high').textContent=fmt(a.high);$('bounds').textContent=`${fmt(a.low)} < π < ${fmt(a.high)}`;$('gap').textContent=fmt(a.gap);let digits=0;while(digits<9&&a.low.toFixed(digits)===a.high.toFixed(digits))digits++;$('accuracy').textContent=`I due limiti sono sempre più vicini: differenza ${fmt(a.gap)}.`;$('compare').textContent=`Con ${n} lati, l’approssimazione per difetto è ${fmt(a.low,6)} e quella per eccesso è ${fmt(a.high,6)}.`;
+// Fixed axis, so the shrinking colored interval is visually meaningful across steps.
+const min=2.5,max=5.3;const x=v=>Math.min(100,Math.max(0,100*(v-min)/(max-min)));$('segment').style.left=x(a.low)+'%';$('segment').style.width=Math.max(0,x(a.high)-x(a.low))+'%';$('piMarker').style.left=x(Math.PI)+'%';$('axisMin').textContent='2,5';$('axisMax').textContent='5,3';renderHistory(n);
+}
+function set(n,track=true){n=Math.max(3,Math.min(512,Math.round(n)));if(track&&!seen.includes(n))seen.push(n);update(n)}
+input.addEventListener('change',()=>set(Number(input.value)));range.addEventListener('input',()=>set(Number(range.value)));$('double').addEventListener('click',()=>set(Math.min(512,Number(input.value)*2)));$('reset').addEventListener('click',()=>{seen=[];set(6)});$('showPi').addEventListener('change',()=>renderHistory(Number(input.value)));set(6);
+})();
+</script>
+</body>
+</html>
